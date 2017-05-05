@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Google.ProtocolBuffers.Collections;
-
+using System.Linq;
 namespace Google.ProtocolBuffers.Descriptors
 {
     /// <summary>
@@ -66,8 +66,10 @@ namespace Google.ProtocolBuffers.Descriptors
             foreach (FieldInfo field in typeof(FieldType).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 FieldType fieldType = (FieldType) field.GetValue(null);
-                FieldMappingAttribute mapping =
-                    (FieldMappingAttribute) field.GetCustomAttributes(typeof(FieldMappingAttribute), false)[0];
+                IEnumerable<System.Attribute> mappings =
+                     field.GetCustomAttributes(typeof(FieldMappingAttribute), false);
+                
+                FieldMappingAttribute mapping = (FieldMappingAttribute)mappings.First();
                 map[fieldType] = mapping;
             }
             return Dictionaries.AsReadOnly(map);

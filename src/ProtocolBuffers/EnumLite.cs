@@ -130,20 +130,9 @@ namespace Google.ProtocolBuffers
             int[] array;
             try
             {
-#if CLIENTPROFILE
+
                 // It will actually be a T[], but the CLR will let us convert.
                 array = (int[])Enum.GetValues(typeof(T));
-#else
-                var temp = new List<T>();
-                foreach (var fld in typeof (T).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
-                {
-                    if (fld.IsLiteral && fld.FieldType == typeof(T))
-                    {
-                        temp.Add((T)fld.GetValue(null));
-                    }
-                }
-                array = (int[])(object)temp.ToArray();
-#endif
             }
             catch
             {

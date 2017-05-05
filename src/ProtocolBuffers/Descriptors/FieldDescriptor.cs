@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Google.ProtocolBuffers.Collections;
+using System.Linq;
 using Google.ProtocolBuffers.DescriptorProtos;
 
 namespace Google.ProtocolBuffers.Descriptors
@@ -445,7 +446,7 @@ namespace Google.ProtocolBuffers.Descriptors
             {
                 FieldType fieldType = (FieldType) field.GetValue(null);
                 FieldMappingAttribute mapping =
-                    (FieldMappingAttribute) field.GetCustomAttributes(typeof(FieldMappingAttribute), false)[0];
+                    (FieldMappingAttribute) field.GetCustomAttributes(typeof(FieldMappingAttribute), false).First();
                 map[fieldType] = mapping.MappedType;
             }
             return Dictionaries.AsReadOnly(map);

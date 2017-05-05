@@ -60,11 +60,11 @@ namespace Google.ProtocolBuffers
             {
                 throw new ArgumentNullException("type", "No type specified.");
             }
-            if (type.IsAbstract || type.IsGenericTypeDefinition)
+            /*if (type.IsAbstract || type.IsGenericTypeDefinition)
             {
                 throw new ArgumentException("Unable to get a default message for an abstract or generic type (" +
                                             type.FullName + ")");
-            }
+            }*/
             if (!typeof(IMessage).IsAssignableFrom(type))
             {
                 throw new ArgumentException("Unable to get a default message for non-message type (" + type.FullName +

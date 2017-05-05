@@ -82,11 +82,7 @@ namespace Google.ProtocolBuffers
 
         public static Exception CreateMissingMethod(Type type, string methodName)
         {
-#if CLIENTPROFILE
-            return new System.MissingMethodException(type.FullName, methodName);
-#else
             return new System.ArgumentException(String.Format("The method '{0}' was not found on type {1}.", methodName, type));
-#endif
         }
     }
 }
