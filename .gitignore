@@ -40,3 +40,4 @@ mono/TestResult.xml
 mono/.libs
 mono/*.exe
 mono/*.dll
+project.lock.json
